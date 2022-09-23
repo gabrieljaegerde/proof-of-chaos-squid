@@ -17,8 +17,8 @@ export async function remarkHandler(
     const originAccountId = getOriginAccountId(item.call.origin)
     if (originAccountId == null) return
 
-    const rmrkObject = message.split('::')
-    switch (rmrkObject[2]) {
+    const args = message.split('::')
+    switch (args[2]) {
         case 'LUCK':
             // if (isValidAddress(originAccountId)) ...
         case 'SETTING':

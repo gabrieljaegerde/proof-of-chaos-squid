@@ -15,6 +15,9 @@ const processor = new SubstrateBatchProcessor()
                 args: true,
             },
         },
+        range: {
+            from: 14375300
+        }
     } as const)
 
 type Item = BatchProcessorItem<typeof processor>
