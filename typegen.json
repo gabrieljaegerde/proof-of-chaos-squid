@@ -4,7 +4,6 @@
   "events": [
   ],
   "calls": [ 
-    "Utility.batch_all",
     "System.remark"
   ],
   "storage": [
