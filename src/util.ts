@@ -1,4 +1,5 @@
 import * as ss58 from '@subsquid/ss58'
+import {decodeHex} from '@subsquid/substrate-processor'
 
 export function getOriginAccountId(origin: any): string | undefined {
     if (origin && origin.__kind === 'system' && origin.value.__kind === 'Signed') {
@@ -8,6 +9,6 @@ export function getOriginAccountId(origin: any): string | undefined {
     }
 }
 
-export function encodeId(id: Uint8Array) {
-    return ss58.codec('kusama').encode(id)
+export function encodeId(id: string | Uint8Array) {
+    return ss58.codec('kusama').encode(typeof id === 'string' ? decodeHex(id) : id)
 }
