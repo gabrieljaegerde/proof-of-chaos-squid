@@ -1,17 +1,57 @@
-type Account @entity {
-  "Account address"
+type Setting @entity {
   id: ID!
-  transfersTo: [Transfer!] @derivedFrom(field: "to")
-  transfersFrom: [Transfer!] @derivedFrom(field: "from")
+  referendumIndex: Int! @index
+  blockNumber: Int! @index
+  min: String
+  max: String
+  first: String
+  blockCutOff: String
+  directOnly: Boolean
+  createNewCollection: Boolean
+  newCollectionSymbol: String
+  newCollectionPath: String
+  newCollectionFile: String
+  newCollectionName: String
+  newCollectionDescription: String
+  makeEquippable: [String]
+  babyBonus: Int
+  toddlerBonus: Int
+  adolescentBonus: Int
+  adultBonus: Int
+  minAmount: Int
+  seed: String
+  defaultOption: Option!
+  otherOptions: [Option!] @derivedFrom(field: "setting")
+  timestamp: DateTime
+}
+        
+type Option @entity {
+  id: ID!
+  settingId: ID!
+  setting: Setting!
+  symbol: String
+  text: String
+  artist: String
+  creativeDirector: String
+  rarity: String
+  itemName: String
+  royaltyMin: Int
+  royaltyMax: Int
+  resources: [Resource!] @derivedFrom(field: "option")
 }
 
-type Transfer @entity {
+type Resource @entity {
   id: ID!
-  blockNumber: Int! @index
-  timestamp: DateTime! @index
-  extrinsicHash: String @index
-  from: Account!
-  to: Account!
-  amount: BigInt! @index
-  fee: BigInt! # fee is calculated at the best effort and may be zero for some old extrinsics
+  optionId: ID!
+  option: Option!
+  name: String
+  main: String
+  thumb: String
+  text: String
+  artist: String
+  creativeDirector: String
+  rarity: String
+  itemName: String
+  slot: String
+  title: String
 }

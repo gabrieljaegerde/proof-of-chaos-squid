@@ -1,5 +1,5 @@
 {
-  "name": "kusama-transfers",
+  "name": "proof-of-chaos-squid",
   "private": true,
   "engines" : { 
     "node" : ">=16"
