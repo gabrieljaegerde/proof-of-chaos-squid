@@ -17,6 +17,7 @@ const processor = new SubstrateBatchProcessor()
         },
         range: {
             from: 14375300
+            // 14594430
         }
     } as const)
 
@@ -27,7 +28,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
     for (let block of ctx.blocks) {
         for (let item of block.items) {
             if (item.name == 'System.remark') {
-                await remarkHandler(ctx, item)
+                await remarkHandler(ctx, item, block.header)
             }
         }
     }

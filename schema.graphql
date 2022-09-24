@@ -1,6 +1,7 @@
-type Setting @entity {
+type Config @entity {
   id: ID!
   referendumIndex: Int! @index
+  version: Int! @index
   blockNumber: Int! @index
   min: String
   max: String
@@ -20,15 +21,15 @@ type Setting @entity {
   adultBonus: Int
   minAmount: Int
   seed: String
-  defaultOption: Option!
-  otherOptions: [Option!] @derivedFrom(field: "setting")
+  options: [Option!] @derivedFrom(field: "config")
   timestamp: DateTime
 }
         
 type Option @entity {
   id: ID!
-  settingId: ID!
-  setting: Setting!
+  configId: ID!
+  config: Config!
+  transferable: Int
   symbol: String
   text: String
   artist: String
@@ -37,6 +38,7 @@ type Option @entity {
   itemName: String
   royaltyMin: Int
   royaltyMax: Int
+  isDefault: Boolean
   resources: [Resource!] @derivedFrom(field: "option")
 }
 
@@ -54,4 +56,17 @@ type Resource @entity {
   itemName: String
   slot: String
   title: String
+}
+
+type Distribution @entity {
+  id: ID!
+  referendumIndex: Int!
+  blockNumber: Int! @index
+  distributionVersion: Int!
+  wallet: String @index
+  amountConsidered: BigInt! @index
+  indexItemReceived: Int
+  dragonEquipped: String
+  chanceAtItem: Int
+  timestamp: DateTime
 }

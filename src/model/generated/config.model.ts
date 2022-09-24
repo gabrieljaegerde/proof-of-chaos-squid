@@ -1,9 +1,9 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, ManyToOne as ManyToOne_, OneToMany as OneToMany_} from "typeorm"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, OneToMany as OneToMany_} from "typeorm"
 import {Option} from "./option.model"
 
 @Entity_()
-export class Setting {
-  constructor(props?: Partial<Setting>) {
+export class Config {
+  constructor(props?: Partial<Config>) {
     Object.assign(this, props)
   }
 
@@ -13,6 +13,10 @@ export class Setting {
   @Index_()
   @Column_("int4", {nullable: false})
   referendumIndex!: number
+
+  @Index_()
+  @Column_("int4", {nullable: false})
+  version!: number
 
   @Index_()
   @Column_("int4", {nullable: false})
@@ -72,12 +76,8 @@ export class Setting {
   @Column_("text", {nullable: true})
   seed!: string | undefined | null
 
-  @Index_()
-  @ManyToOne_(() => Option, {nullable: true})
-  defaultOption!: Option
-
-  @OneToMany_(() => Option, e => e.setting)
-  otherOptions!: Option[]
+  @OneToMany_(() => Option, e => e.config)
+  options!: Option[]
 
   @Column_("timestamp with time zone", {nullable: true})
   timestamp!: Date | undefined | null

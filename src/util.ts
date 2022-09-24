@@ -12,3 +12,11 @@ export function getOriginAccountId(origin: any): string | undefined {
 export function encodeId(id: string | Uint8Array) {
     return ss58.codec('kusama').encode(typeof id === 'string' ? decodeHex(id) : id)
 }
+
+export function MissingConfigWarn(hashOrIndex: string | number) {
+    return `Missing config with ${hashOrIndex}`
+}
+
+export function MissingOptionWarn(hashOrIndex: string | number) {
+    return `Missing option with ${hashOrIndex}`
+}

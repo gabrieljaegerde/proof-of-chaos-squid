@@ -1,5 +1,5 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, OneToMany as OneToMany_} from "typeorm"
-import {Setting} from "./setting.model"
+import {Config} from "./config.model"
 import {Resource} from "./resource.model"
 
 @Entity_()
@@ -12,11 +12,14 @@ export class Option {
   id!: string
 
   @Column_("text", {nullable: false})
-  settingId!: string
+  configId!: string
 
   @Index_()
-  @ManyToOne_(() => Setting, {nullable: true})
-  setting!: Setting
+  @ManyToOne_(() => Config, {nullable: true})
+  config!: Config
+
+  @Column_("int4", {nullable: true})
+  transferable!: number | undefined | null
 
   @Column_("text", {nullable: true})
   symbol!: string | undefined | null
@@ -41,6 +44,9 @@ export class Option {
 
   @Column_("int4", {nullable: true})
   royaltyMax!: number | undefined | null
+
+  @Column_("bool", {nullable: true})
+  isDefault!: boolean | undefined | null
 
   @OneToMany_(() => Resource, e => e.option)
   resources!: Resource[]
